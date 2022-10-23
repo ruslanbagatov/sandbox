@@ -1,26 +1,35 @@
-class Vehicle:
-    count = 0
-    def __init__(self, type):
-        self.type = type
+class Car:
+    count_of_cars = 0
+    count_of_liters = 0
+    is_engine_works = False
 
-    def start_engine(self):
-        print('Engine started!')
-
-    def shutdown_engine(self):
-        print('Engine off!')
-
-
-
-class Car(Vehicle):
-
-    fuel_count = 0
-
-    def __init__(self, fuel_type):
-        self.fuel_type = fuel_type
+    def __init__(self, model, fuel_tank_size):
+        self.model = model
+        self.fuel_tank_size = fuel_tank_size
+        Car.count_of_cars += 1
+        print(f'Car {self.model} created. Fuel tank is empty')
 
     def add_fuel(self, liters):
-        self.fuel_count += liters
+        self.count_of_liters += liters
+        print(f'You added {liters} liters')
+
+    def start_engine(self):
+        if self.count_of_liters == 0:
+            print('Fuel tank is empty. Add the fuel!')
+        else:
+            print('Engine started!')
+            self.is_engine_works = True
+
+    def shutdown_engine(self):
+        print(f'Engine off!. You have {self.count_of_liters} liters of petrol.')
+        self.is_engine_works = False
+
+    def is_engine_working(self):
+        if self.is_engine_works:
+            print('Engine works.')
+            self.count_of_liters -= 1
+        else:
+            print('Engine stay turned off.')
 
 
-mazda = Car('petrol')
-print(mazda.fuel_count)
+car_1 = Car('Mercedes', 20)
